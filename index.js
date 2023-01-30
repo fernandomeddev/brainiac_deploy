@@ -1,17 +1,28 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 
-app.get('/', (request, response) => {
-    return response.json({ message: 'Server Is Up'});
-});
+app.use(express.json());
+app.use(express.urlencoded({extended: true }))
 
-app.get('/updates', (request, response) => {
-    return response.json({ message: 'Server is Updated!'});
-});
 
-app.post('/test', (request, response) => {
-    const { name, date } = request.body;
-    return response.json({ name, date })
-});
 
-app.listen(3333);
+const consign = require('consign')
+require('./src/database/mongodb')
+
+consign()
+    .then('./src/config/middlewares.js')
+    .then('./src/config/multer.js')
+    .then('./src/controllers')
+    .into(app)
+
+app.get("/terms", (req, res) => {
+    return res.json({
+        message: "Termos de Serviço"
+    })
+})
+
+app.listen(3333, () => {
+    
+    console.log('Api Rodando.');
+});
