@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const IndividualModel = require('../models/IndividualModel');
 
-router.post('/individual', async (request, response) => {
+/* router.post('/individual', async (request, response) => {
     try {
         const { name, email } = request.body;
 
@@ -26,7 +26,7 @@ router.post('/individual', async (request, response) => {
     } catch (error) {
         return response.send(error)
     }
-});
+}); */
 
 router.get('/individual', async (request, response) => {
     try {
