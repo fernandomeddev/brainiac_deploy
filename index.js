@@ -12,7 +12,6 @@ require('./src/database/mongodb')
 
 consign()
     .then('./src/config/middlewares.js')
-    .then('./src/config/multer.js')
     .then('./src/controllers')
     .into(app)
 
