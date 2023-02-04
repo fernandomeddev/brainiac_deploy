@@ -359,12 +359,21 @@
                 }
             }
         },
-        "/admin/list_individual": {
+        "/remove_individual/:individual_id": {
             "delete":{
                 "summary": "Um Administrador remove um usuário ",
                 "description":"Um Administrador remove um usuário",
                 "tags":["Admin"],
                 "security":[{"bearerAuth":[]}],
+                "parameters":[
+                    {
+                        "name":":individual_id",
+                        "type":"string",
+                        "in":"path",
+                        "description":"ID de um usuário",
+                        "required":true
+                    }
+                ],
                 "responses":{
                     "400":{
                        "description":"individual not found"

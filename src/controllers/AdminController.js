@@ -54,7 +54,7 @@ router.get('/info_individual/:individual_id', async (request, response) => {
     }
 });
 
-router.delete('/info_individual/:individual_id', async (request, response) => {
+router.delete('/remove_individual/:individual_id', async (request, response) => {
     try {
         const { individual_id: individualId } = request.params;
 
