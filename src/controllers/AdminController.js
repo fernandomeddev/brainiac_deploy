@@ -59,10 +59,10 @@ router.delete('/info_individual/:individual_id', async (request, response) => {
         const { individual_id: individualId } = request.params;
 
         const individual = await IndividualModel.findById(individualId);
-        if (!individual) return response.status(401).json({ message: 'individual not found' });
+        if (!individual) return response.status(400).json({ message: 'individual not found' });
 
         const individualDeleted = await IndividualModel.findByIdAndDelete(individualId);
-        if(!individualDeleted) return response.status(404).send('individual not be deleted');
+        if(!individualDeleted) return response.status(422).send('individual not be deleted');
 
         return response.json({ data: individual, message: 'individual deleted!' });
 

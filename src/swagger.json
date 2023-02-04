@@ -1,0 +1,455 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "title":"API - Cadastro de Usuários e controle de sessão com jwt ",
+        "description":"criação de um novo usuário importante criar um usuário administrador e dois não administradores para execução dos testes.",
+        "termsOfService":"http://18.231.60.49:3333/terms",
+        "contact":{
+            "email":"fernandodesenvti@gmail.com"
+        },
+        "version":"1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http://18.231.60.49:3333",
+            "description":"API Cadastro de Usuários"
+        }
+    ],
+    "paths":{
+         "/auth/signup": {
+             "post":{
+                 "summary": "Cadastro usuário",
+                 "description":"criação de um novo usuário importante criar um usuário administrador e dois não administradores para execução dos testes.",
+                 "tags":["Individuals"],
+                 "requestBody":{
+                     "content":{
+                         "application/json": {
+                             "schema":{
+                                 "$ref":"#/components/schemas/Individual"
+                             },
+                             "examples":{
+                                 "user":{
+                                     "value":{
+                                         "name":"Anakin Skywalker",
+                                         "email":"imyourfather@empire.com",
+                                         "password":"padme123",
+                                         "confirmPassword":"padme123"
+                                     }
+                                 },
+                                 "userAdmin":{
+                                     "value":{
+                                         "name":"Luke Skywalker",
+                                         "email":"youkillmyfather@resistence.com",
+                                         "password":"oldben123",
+                                         "confirmPassword":"oldben123",
+                                         "isAdmin":"true"
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 },
+                 "responses":{
+                     "401":{
+                         "description":"Unauthorized"
+                     },
+                     "400": {
+                         "description":"User already exists"
+                     },
+                     "422": {
+                         "description":"Bad Request"
+                     },
+                     "200": {
+                         "description":"ok",
+                         "content":{
+                             "application/json":{
+                                 "schema":{
+                                     "type":"object",
+                                     "$ref":"#/components/schemas/Individual"
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+         },
+         "/auth/signin": {
+             "post":{
+                 "summary": "Login /autenticação de usuário",
+                 "description":"Login de usuário",
+                 "tags":["Individuals"],
+                 "requestBody":{
+                     "content":{
+                         "application/json": {
+                             "schema":{
+                                 "$ref":"#/components/schemas/Individual"
+                             },
+                             "examples":{
+                                 "user":{
+                                     "value":{
+                                         "email":"imyourfather@empire.com",
+                                         "password":"padme123"
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 },
+                 "responses":{
+                     "400":{
+                         "description":"'User not exists'"
+                     },
+                     "402": {
+                         "description":"Invalid password"
+                     },
+                     "401": {
+                         "description":"inform your email!"
+                     },
+                     "422": {
+                         "description":"inform your Password!"
+                     },
+                     "500": {
+                         "description":"'sorry... try again later'"
+                     },
+                     "200": {
+                         "description":"ok",
+                         "content":{
+                             "application/json":{
+                                 "schema":{
+                                     "type":"object",
+                                     "$ref":"#/components/schemas/Individual"
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+         },
+         "/auth/admin/register": {
+            "post":{
+                "summary": "Cadastro de um usuário Admin por um usuário admion",
+                "description":"criação de um novo usuário importante criar um usuário administrador e dois não administradores para execução dos testes.",
+                "tags":["Admin"],
+                "requestBody":{
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "$ref":"#/components/schemas/Individual"
+                            },
+                            "examples":{
+                                "user":{
+                                    "value":{
+                                        "name":"Anakin Skywalker",
+                                        "email":"imyourfather@empire.com",
+                                        "password":"padme123",
+                                        "confirmPassword":"padme123"
+                                    }
+                                },
+                                "userAdmin":{
+                                    "value":{
+                                        "name":"Luke Skywalker",
+                                        "email":"youkillmyfather@resistence.com",
+                                        "password":"oldben123",
+                                        "confirmPassword":"oldben123",
+                                        "isAdmin":"true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401":{
+                        "description":"Unauthorized"
+                    },
+                    "400": {
+                        "description":"User already exists"
+                    },
+                    "422": {
+                        "description":"Bad Request"
+                    },
+                    "200": {
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Individual"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/individual_updade/:individual_id": {
+            "put":{
+                "summary": "Um Administrador modifica um Usuário cadastrado ",
+                "description":"Um Administrador modifica / atualiza um Usuário cadastrado",
+                "tags":["Admin"],
+                "requestBody":{
+                    "content":{
+                        "application/json": {
+                            "schema":{
+                                "$ref":"#/components/schemas/Individual"
+                            },
+                            "examples":{
+                                "modify_user":{
+                                    "value":{
+                                        "name":"Anakin Skywalker",
+                                        "email":"imyourfather@empire.com",
+                                        "password":"padme123",
+                                        "confirmPassword":"padme123"
+                                    }
+                                },
+                                "modify_user_admin":{
+                                    "value":{
+                                        "name":"Luke Skywalker",
+                                        "email":"youkillmyfather@resistence.com",
+                                        "password":"oldben123",
+                                        "confirmPassword":"oldben123",
+                                        "isAdmin":"true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security":[{"bearerAuth":[]}],
+                "parameters":[
+                    {
+                        "name":":individual_id",
+                        "type":"string",
+                        "in":"path",
+                        "description":"ID de um usuário",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"User Not exists"
+                    },
+                    "401":{
+                        "description":"Unauthorized"
+                    },
+                    "422": {
+                        "description":"Bad Request"
+                    },
+                    "200": {
+                        "description":"ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object"
+                                },
+                                "examples":{
+                                    "modify_user":{
+                                        "value":{
+                                            "name":"Anakin Skywalker",
+                                            "email":"imyourfather@empire.com",
+                                            "password":"padme123",
+                                            "confirmPassword":"padme123"
+                                        }
+                                    },
+                                    "modify_user_admin":{
+                                        "value":{
+                                            "name":"Luke Skywalker",
+                                            "email":"youkillmyfather@resistence.com",
+                                            "password":"oldben123",
+                                            "confirmPassword":"oldben123",
+                                            "isAdmin":"true"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+         "/admin/info_individual/{individual_id}": {
+             "get":{
+                 "summary": "Um Adminstrador busca um Usuário ",
+                 "description":"Um usuário administrador busca um usuário cadastrado",
+                 "tags":["Admin"],
+                 "security":[{"bearerAuth":[]}],
+                 "parameters":[
+                     {
+                         "name":"individual_id",
+                         "type":"string",
+                         "in":"path",
+                         "description":"ID de um usuário",
+                         "required":true
+                     }
+                 ],
+                 "responses":{
+                     "400":{
+                         "description":"User Not exists"
+                     },
+                     "401":{
+                         "description":"Unauthorized"
+                     },
+                     "422": {
+                         "description":"Bad Request"
+                     },
+                     "200": {
+                         "description":"ok",
+                         "content":{
+                             "application/json":{
+                                 "schema":{
+                                     "type":"object"
+                                 },
+                                 "examples":{
+                                     "userin_formations":{
+                                        "value":{
+                                            "isAdmin": false,
+                                            "_id": "629982c064f9ef1149c9057a",
+                                            "name": "teste",
+                                            "email": "teste@teste.com",
+                                            "creatAt": "2022-06-03T03:40:48.453Z"
+                                        }
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+         },
+         "/admin/list_individual": {
+             "get":{
+                 "summary": "Um Administrador Busca todos os Usuários ",
+                 "description":"Administrador busca todos os usuários do sistema",
+                 "tags":["Admin"],
+                 "security":[{"bearerAuth":[]}],
+                 "responses":{
+                     "400":{
+                        "description":"User Not exists"
+                     },
+                     "401":{
+                        "description":"Unauthorized"
+                     },
+                     "422": {
+                        "description":"Bad Request"
+                     },
+                     "500": {
+                        "description":"sorry... try again later"
+                     },
+                     "200": {
+                         "description":"ok",
+                         "content":{
+                             "application/json":{
+                                 "schema":{
+                                     "type":"object"
+                                 },
+                                 "examples":{
+                                     "userAdmin":{
+                                        "value":{
+                                            "isAdmin": false,
+                                            "_id": "629982c064f9ef1149c9057a",
+                                            "name": "teste",
+                                            "email": "teste@teste.com",
+                                            "creatAt": "2022-06-03T03:40:48.453Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/list_individual": {
+            "delete":{
+                "summary": "Um Administrador remove um usuário ",
+                "description":"Um Administrador remove um usuário",
+                "tags":["Admin"],
+                "security":[{"bearerAuth":[]}],
+                "responses":{
+                    "400":{
+                       "description":"individual not found"
+                    },
+                    "401":{
+                       "description":"Unauthorized"
+                    },
+                    "422": {
+                       "description":"individual not be deleted"
+                    },
+                    "500": {
+                       "description":"sorry... try again later"
+                    },
+                    "200": {
+                        "description":"individual deleted!",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object"
+                                },
+                                "examples":{
+                                    "userAdmin":{
+                                       "value":{
+                                           "data": {
+                                                "isAdmin": false,
+                                                "_id": "629982c064f9ef1149c9057a",
+                                                "name": "teste",
+                                                "email": "teste@teste.com",
+                                                "creatAt": "2022-06-03T03:40:48.453Z"
+                                            },
+                                            "message": "individual deleted!"
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+       }
+    },
+    "components":{
+        "schemas":{
+            "Individual":{
+                "type":"object",
+                "properties":{
+                    "id":{
+                        "type":"string"
+                    },
+                    "name":{
+                        "type":"string"
+                    },
+                    "email":{
+                        "type":"string"
+                    },
+                    "password":{
+                        "type":"string"
+                    },
+                    "confirmPassword":{
+                        "type":"string"
+                    },
+                    "isAdmin":{
+                        "type":"boolean"
+                    }
+                }
+            },
+            "IndividualLogin":{
+                 "type":"object",
+                 "properties":{
+                     "email":{
+                        "type":"string"
+                     },
+                     "password":{
+                        "type":"string"
+                    }
+                }
+            }
+              
+        },
+        "securitySchemes":{
+            "bearerAuth":{
+                "type":"http",
+                "scheme":"bearer",
+                "bearerFormat":"JWT"
+            }
+        }
+    }
+ }

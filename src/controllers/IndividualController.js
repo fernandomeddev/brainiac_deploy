@@ -39,10 +39,13 @@ router.post('/signup', async (request, response) => {
 router.post('/signin', async (request, response) => {
     try {
         const {email, password } = request.body;
+        if (!email) return response.status(422).json({ message: 'inform your email!' });
+        if (!password) return response.status(422).json({ message: 'inform your Password!' });
+
         const individual = await IndividualModel.findOne({ email }).select('+password')
 
-        if (!individual) return response.status(400).send({ error: 'User not found!'})  
-        if(!await bcrypt.compare(password, individual.password)) return response.status(400).send({erro: 'Invalid password'})
+        if (!individual) return response.status(400).send({ error: 'User not exists' })  
+        if(!await bcrypt.compare(password, individual.password)) return response.status(400).send({ erro: 'Invalid password' })
             
         individual.password = undefined;
 
