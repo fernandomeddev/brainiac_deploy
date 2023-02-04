@@ -1,8 +1,8 @@
 {
     "openapi":"3.0.0",
     "info":{
-        "title":"API - Cadastro de Usuários e controle de sessão com jwt ",
-        "description":"criação de um novo usuário importante criar um usuário administrador e dois não administradores para execução dos testes.",
+        "title":"API - Cadastro de usuários com autenticação jwt ",
+        "description":"Api de cadastro de usuários, e cadastro de usuários adminstradores com autenticação JWT.",
         "termsOfService":"http://18.231.60.49:3333/terms",
         "contact":{
             "email":"fernandodesenvti@gmail.com"
@@ -28,23 +28,23 @@
                                  "$ref":"#/components/schemas/Individual"
                              },
                              "examples":{
-                                 "user":{
-                                     "value":{
-                                         "name":"Anakin Skywalker",
-                                         "email":"imyourfather@empire.com",
-                                         "password":"padme123",
-                                         "confirmPassword":"padme123"
-                                     }
-                                 },
-                                 "userAdmin":{
-                                     "value":{
-                                         "name":"Luke Skywalker",
-                                         "email":"youkillmyfather@resistence.com",
-                                         "password":"oldben123",
-                                         "confirmPassword":"oldben123",
-                                         "isAdmin":"true"
-                                     }
-                                 }
+                                "user":{
+                                    "value": {
+                                        "name":"teste",
+                                        "email":"teste@super.com",
+                                        "password": "123456",
+                                        "confirmPassword":"123456"
+                                    }
+                                },
+                                "user_admin":{
+                                    "value":{
+                                        "name":"Admin teste",
+                                        "email":"adminteste@super.com",
+                                        "password":"123456",
+                                        "confirmPassword":"123456",
+                                        "isAdmin":"true"
+                                    }
+                                }
                              }
                          }
                      }
@@ -87,8 +87,8 @@
                              "examples":{
                                  "user":{
                                      "value":{
-                                         "email":"imyourfather@empire.com",
-                                         "password":"padme123"
+                                        "email":"admin@super.com",
+                                        "password":"123456"
                                      }
                                  }
                              }
@@ -125,63 +125,6 @@
                  }
              }
          },
-         "/auth/admin/register": {
-            "post":{
-                "summary": "Cadastro de um usuário Admin por um usuário admion",
-                "description":"criação de um novo usuário importante criar um usuário administrador e dois não administradores para execução dos testes.",
-                "tags":["Admin"],
-                "requestBody":{
-                    "content":{
-                        "application/json": {
-                            "schema":{
-                                "$ref":"#/components/schemas/Individual"
-                            },
-                            "examples":{
-                                "user":{
-                                    "value":{
-                                        "name":"Anakin Skywalker",
-                                        "email":"imyourfather@empire.com",
-                                        "password":"padme123",
-                                        "confirmPassword":"padme123"
-                                    }
-                                },
-                                "userAdmin":{
-                                    "value":{
-                                        "name":"Luke Skywalker",
-                                        "email":"youkillmyfather@resistence.com",
-                                        "password":"oldben123",
-                                        "confirmPassword":"oldben123",
-                                        "isAdmin":"true"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses":{
-                    "401":{
-                        "description":"Unauthorized"
-                    },
-                    "400": {
-                        "description":"User already exists"
-                    },
-                    "422": {
-                        "description":"Bad Request"
-                    },
-                    "200": {
-                        "description":"ok",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "$ref":"#/components/schemas/Individual"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/individual_updade/:individual_id": {
             "put":{
                 "summary": "Um Administrador modifica um Usuário cadastrado ",
@@ -195,19 +138,15 @@
                             },
                             "examples":{
                                 "modify_user":{
-                                    "value":{
-                                        "name":"Anakin Skywalker",
-                                        "email":"imyourfather@empire.com",
-                                        "password":"padme123",
-                                        "confirmPassword":"padme123"
+                                    "value": {
+                                        "name":"super",
+                                        "email":"super@super.com"
                                     }
                                 },
                                 "modify_user_admin":{
                                     "value":{
-                                        "name":"Luke Skywalker",
-                                        "email":"youkillmyfather@resistence.com",
-                                        "password":"oldben123",
-                                        "confirmPassword":"oldben123",
+                                        "name":"Admin",
+                                        "email":"admin@super.com",
                                         "isAdmin":"true"
                                     }
                                 }
@@ -304,8 +243,8 @@
                                         "value":{
                                             "isAdmin": false,
                                             "_id": "629982c064f9ef1149c9057a",
-                                            "name": "teste",
-                                            "email": "teste@teste.com",
+                                            "name": "baby",
+                                            "email": "baby@teste.com",
                                             "creatAt": "2022-06-03T03:40:48.453Z"
                                         }
                                      }
